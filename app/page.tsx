@@ -128,6 +128,17 @@ export default function WalletWalaLanding() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
+      {/* Floating Download Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <Button 
+          size="lg" 
+          className="bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-full px-6 py-3"
+          onClick={() => window.open('https://admin.walletwala.techrealm.pk/install', '_blank')}
+        >
+          <Smartphone className="mr-2 w-5 h-5" />
+          Download App
+        </Button>
+      </div>
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -202,12 +213,21 @@ export default function WalletWalaLanding() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white transition-all duration-300 hover:scale-105">
+              <Button 
+                size="lg" 
+                className="bg-green-600 hover:bg-green-700 text-white transition-all duration-300 hover:scale-105"
+                onClick={() => window.open('https://admin.walletwala.techrealm.pk', '_blank')}
+              >
                 Start Talking to Your Wallet
                 <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
-              <Button size="lg" variant="outline" className="transition-all duration-300 hover:scale-105">
-                See How It Works
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="transition-all duration-300 hover:scale-105"
+                onClick={() => window.open('https://admin.walletwala.techrealm.pk/install', '_blank')}
+              >
+                Download App
               </Button>
             </div>
           </div>
@@ -628,6 +648,16 @@ export default function WalletWalaLanding() {
                     <li>• "Am I overspending"</li>
                   </ul>
                 </div>
+                
+                <div className="pt-4 border-t border-gray-200">
+                  <Button 
+                    className="w-full bg-green-600 hover:bg-green-700 text-white"
+                    onClick={() => window.open('https://admin.walletwala.techrealm.pk', '_blank')}
+                  >
+                    <MessageCircle className="mr-2 w-4 h-4" />
+                    Try Real App
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -711,7 +741,11 @@ export default function WalletWalaLanding() {
               <Smartphone className="w-5 h-5" />
               Install WalletWala on your phone today!
             </p>
-            <Button size="lg" className="bg-white text-green-600 hover:bg-gray-100">
+            <Button 
+              size="lg" 
+              className="bg-white text-green-600 hover:bg-gray-100"
+              onClick={() => window.open('https://admin.walletwala.techrealm.pk/install', '_blank')}
+            >
               <Smartphone className="mr-2 w-5 h-5" />
               Install Now
             </Button>
@@ -736,18 +770,33 @@ export default function WalletWalaLanding() {
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#features" className="hover:text-white">
                     Features
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#pricing" className="hover:text-white">
                     Pricing
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
-                    Download
+                  <a 
+                    href="https://admin.walletwala.techrealm.pk/install" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-white"
+                  >
+                    Download App
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://admin.walletwala.techrealm.pk" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-white"
+                  >
+                    Open App
                   </a>
                 </li>
               </ul>
