@@ -220,4 +220,47 @@
     transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   }
+  
+  /* Mobile-specific styles */
+  @media (max-width: 768px) {
+    .persona-card-mobile {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .persona-card-mobile:active {
+      transform: scale(0.98);
+    }
+    
+    .persona-card-mobile:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Add a subtle pulse animation to indicate clickability */
+    .persona-card-mobile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .persona-card-mobile:hover::before {
+      opacity: 1;
+    }
+  }
+  
+  /* Improved touch interactions */
+  @media (hover: none) and (pointer: coarse) {
+    .touch-friendly {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
 }

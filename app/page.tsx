@@ -62,6 +62,8 @@ export default function WalletWalaLanding() {
   const [currentMood, setCurrentMood] = useState(35)
   const [isDragging, setIsDragging] = useState(false)
   const moodBarRef = useRef<HTMLDivElement>(null)
+  const [visibleCards, setVisibleCards] = useState<number[]>([])
+  const [clickedCards, setClickedCards] = useState<number[]>([])
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true)
@@ -117,6 +119,17 @@ export default function WalletWalaLanding() {
     }, 4000) // Increased to 4 seconds for better readability
     return () => clearInterval(interval)
   }, [])
+
+  // Handle persona card clicks on mobile
+  const handlePersonaCardClick = (index: number) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setClickedCards(prev => 
+        prev.includes(index) 
+          ? prev.filter(i => i !== index) 
+          : [...prev, index]
+      )
+    }
+  }
 
   const handleDemoSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -443,7 +456,13 @@ export default function WalletWalaLanding() {
             ].map((persona, index) => (
               <Card
                 key={index}
-                className={`group cursor-pointer transition-all duration-500 ${persona.bgColor} ${persona.hoverColor} border-0 shadow-sm hover:shadow-lg overflow-hidden`}
+                data-persona-card
+                onClick={() => handlePersonaCardClick(index)}
+                className={`group cursor-pointer transition-all duration-500 persona-card-mobile ${persona.bgColor} ${persona.hoverColor} border-0 shadow-sm hover:shadow-lg overflow-hidden relative ${
+                  typeof window !== 'undefined' && window.innerWidth < 768 && clickedCards.includes(index)
+                    ? 'ring-2 ring-green-500 ring-opacity-50'
+                    : ''
+                }`}
               >
                 <CardContent className="p-6 text-center relative">
                   {/* Single Icon Container */}
@@ -457,11 +476,36 @@ export default function WalletWalaLanding() {
                   <div className="space-y-2">
                     <h3 className="heading-zen text-lg text-gray-900">{persona.title}</h3>
                     <p className="text-zen text-sm text-gray-600">{persona.subtitle}</p>
+                    {/* Mobile click indicator */}
+                    {typeof window !== 'undefined' && window.innerWidth < 768 && (
+                      <div className="text-xs text-gray-500 mt-2 flex items-center justify-center gap-1">
+                        <span>Tap to see details</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </div>
+                    )}
                   </div>
 
                   {/* Hover Content - Slides up from bottom */}
-                  <div className="absolute inset-0 bg-white bg-opacity-95 backdrop-blur-sm flex flex-col justify-center items-center p-6 transform translate-y-full transition-transform duration-500 group-hover:translate-y-0">
-                    <div className="text-center space-y-3">
+                  <div className={`absolute inset-0 bg-white bg-opacity-95 backdrop-blur-sm flex flex-col justify-center items-center p-6 transform transition-transform duration-500 ${
+                    // On mobile: show content when card is clicked
+                    // On desktop: show on hover
+                    typeof window !== 'undefined' && window.innerWidth < 768 
+                      ? clickedCards.includes(index) ? 'translate-y-0' : 'translate-y-full'
+                      : 'translate-y-full group-hover:translate-y-0'
+                  }`}>
+                    <div className="text-center space-y-3 relative w-full">
+                      {/* Close button for mobile */}
+                      {typeof window !== 'undefined' && window.innerWidth < 768 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handlePersonaCardClick(index)
+                          }}
+                          className="absolute -top-2 -right-2 w-6 h-6 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-gray-600 text-xs transition-colors"
+                        >
+                          ×
+                        </button>
+                      )}
                       <div className="bg-gray-50 p-3 rounded-lg">
                         <p className="text-xs text-gray-700 whitespace-pre-line">{persona.example}</p>
                       </div>
@@ -516,10 +560,16 @@ export default function WalletWalaLanding() {
                     <span className="flex items-center gap-1"><Meh className="w-4 h-4" /> Okay</span>
                     <span className="flex items-center gap-1"><Frown className="w-4 h-4" /> Broke</span>
                   </div>
+                  <p className="text-xs text-gray-500 text-center">Click or drag anywhere on the bar to adjust</p>
                   <div
-                    className="relative w-full bg-gray-200 rounded-full h-6 cursor-pointer select-none"
+                    className="relative w-full bg-gray-200 rounded-full h-6 cursor-pointer select-none touch-friendly"
                     onMouseDown={handleMouseDown}
                     onTouchStart={handleTouchStart}
+                    onClick={(e) => {
+                      if (!isDragging) {
+                        updateMoodFromEvent(e.clientX)
+                      }
+                    }}
                     ref={moodBarRef}
                   >
                     <div
