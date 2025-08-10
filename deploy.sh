@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Deploy script for Cloudflare Pages
-echo "🚀 Starting deployment to Cloudflare Pages..."
+# Deploy script for WalletWala Landing Page
+echo "🚀 Starting deployment for WalletWala Landing Page..."
 
 # Clean install dependencies
 echo "📦 Installing dependencies..."

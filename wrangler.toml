@@ -6,7 +6,7 @@ output_directory = "dist"
 bucket = "dist"
 
 [env.production]
-name = "walletwala-landing"
+name = "walletwala-landing-page"
 
 [env.production.vars]
 NODE_ENV = "production" 
