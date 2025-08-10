@@ -14,8 +14,10 @@ npm run build
 # Check if build was successful
 if [ $? -eq 0 ]; then
     echo "✅ Build successful!"
-    echo "📁 Build output is in the .next directory"
+    echo "📁 Build output is in the dist directory"
     echo "🌐 Ready for deployment to Cloudflare Pages"
+    echo "📋 Files generated:"
+    ls -la dist/
 else
     echo "❌ Build failed!"
     exit 1

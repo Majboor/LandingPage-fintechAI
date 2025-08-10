@@ -1,0 +1,12 @@
+[build]
+command = "npm run build"
+output_directory = "dist"
+
+[site]
+bucket = "dist"
+
+[env.production]
+name = "walletwala-landing"
+
+[env.production.vars]
+NODE_ENV = "production" 
