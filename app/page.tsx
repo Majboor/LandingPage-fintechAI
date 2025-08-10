@@ -24,20 +24,34 @@ import {
   Linkedin,
   Twitter,
   Heart,
+  GraduationCap,
+  Laptop,
+  ShoppingBag,
+  Users,
+  Briefcase,
+  Smile,
+  Meh,
+  Frown,
+  Zap,
+  TrendingUp,
+  Shield,
+  Target,
+  Wallet,
+  CreditCard,
 } from "lucide-react"
 
 const chatMessages = [
-  { icon: Coffee, text: "3,200 PKR last month… caffeine is expensive love.", emoji: "☕" },
-  { icon: UtensilsCrossed, text: "2,400 PKR this week… special occasion?", emoji: "🍛" },
-  { icon: Car, text: "9 rides in 3 days… chai ka budget kahan gaya?", emoji: "🚗" },
-  { icon: MessageCircle, text: "Want to know your full story? Let's talk.", emoji: "🤖", isBot: true },
+  { icon: Coffee, text: "3,200 PKR last month… caffeine is expensive love." },
+  { icon: UtensilsCrossed, text: "2,400 PKR this week… special occasion?" },
+  { icon: Car, text: "9 rides in 3 days… chai ka budget kahan gaya?" },
+  { icon: MessageCircle, text: "Want to know your full story? Let's talk.", isBot: true },
 ]
 
 const demoResponses = {
   "where did my money go this week": "45% on groceries, 30% on transport, 15% on eating out, 10% on utilities.",
   "how much on food last month": "You spent 15,600 PKR on food last month. That's 800 PKR more than usual!",
   "show my biggest expense": "Your biggest expense was rent at 35,000 PKR, followed by groceries at 8,200 PKR.",
-  "am i overspending": "You're 2,100 PKR over budget this month. Maybe skip a few Careem rides? 😉",
+  "am i overspending": "You're 2,100 PKR over budget this month. Maybe skip a few Careem rides?",
 }
 
 export default function WalletWalaLanding() {
@@ -100,7 +114,7 @@ export default function WalletWalaLanding() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentMessage((prev) => (prev + 1) % chatMessages.length)
-    }, 3000)
+    }, 4000) // Increased to 4 seconds for better readability
     return () => clearInterval(interval)
   }, [])
 
@@ -115,85 +129,169 @@ export default function WalletWalaLanding() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="container mx-auto px-4 py-20 lg:py-32">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: Animated Chat Bubbles */}
           <div className="space-y-6">
             <div className="space-y-4">
-              <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Made in Pakistan 🇵🇰</Badge>
-              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              <div className="flex items-center space-x-2">
+                <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Made in Pakistan 🇵🇰</Badge>
+                <span className="decorative-zen text-green-600 text-lg">پاکستان میں بنایا گیا</span>
+              </div>
+              <h1 className="text-4xl lg:text-6xl heading-zen text-gray-900 leading-tight">
                 Your Expenses Are <span className="text-green-600">Talking</span>
               </h1>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-xl text-zen text-gray-600 leading-relaxed">
                 The first AI expense tracker that speaks your language. Chat with your money in Urdu, English, or
                 Hinglish!
               </p>
             </div>
 
             {/* Animated Chat Messages */}
-            <div className="space-y-4 h-56">
-              {chatMessages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex items-start space-x-3 transition-all duration-500 ${
-                    index === currentMessage
-                      ? "opacity-100 transform translate-x-0"
-                      : "opacity-30 transform translate-x-4"
-                  }`}
-                >
-                  <div className={`p-2 rounded-full ${message.isBot ? "bg-green-100" : "bg-blue-100"}`}>
-                    <message.icon className={`w-4 h-4 ${message.isBot ? "text-green-600" : "text-blue-600"}`} />
-                  </div>
+            <div className="relative h-64 mb-8">
+              <div className="absolute inset-0 space-y-4">
+                {chatMessages.map((message, index) => (
                   <div
-                    className={`max-w-xs p-3 rounded-lg ${
-                      message.isBot ? "bg-green-100 text-green-800" : "bg-white border shadow-sm"
+                    key={index}
+                    className={`flex items-start space-x-3 transition-all duration-700 ease-in-out ${
+                      index === currentMessage
+                        ? "opacity-100 transform translate-x-0 scale-100"
+                        : index < currentMessage
+                          ? "opacity-60 transform translate-x-0 scale-95"
+                          : "opacity-0 transform translate-x-8 scale-90"
                     }`}
+                    style={{
+                      transform: index === currentMessage 
+                        ? "translateX(0) scale(1)" 
+                        : index < currentMessage 
+                          ? "translateX(0) scale(0.95)" 
+                          : "translateX(2rem) scale(0.9)"
+                    }}
                   >
-                    <p className="text-sm font-medium">{message.text}</p>
+                    <div className={`p-2 rounded-full transition-all duration-500 ${
+                      message.isBot 
+                        ? "bg-green-100 shadow-sm" 
+                        : "bg-blue-100 shadow-sm"
+                    } ${index === currentMessage ? "scale-110" : "scale-100"}`}>
+                      <message.icon className={`w-4 h-4 transition-colors duration-300 ${
+                        message.isBot ? "text-green-600" : "text-blue-600"
+                      }`} />
+                    </div>
+                    <div
+                      className={`max-w-xs p-3 rounded-lg transition-all duration-500 ${
+                        message.isBot 
+                          ? "bg-green-100 text-green-800 shadow-sm" 
+                          : "bg-white border shadow-sm"
+                      } ${index === currentMessage ? "shadow-md" : "shadow-sm"}`}
+                    >
+                      <p className="text-sm font-medium">
+                        {index === currentMessage ? (
+                          <span className="inline-block">
+                            {message.text}
+                            <span className="animate-pulse ml-1">|</span>
+                          </span>
+                        ) : (
+                          message.text
+                        )}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white transition-all duration-300 hover:scale-105">
                 Start Talking to Your Wallet
-                <ArrowRight className="ml-2 w-4 h-4" />
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="transition-all duration-300 hover:scale-105">
                 See How It Works
               </Button>
             </div>
           </div>
 
-          {/* Right: Mobile Mockup */}
+          {/* Right: Enhanced Mobile Mockup */}
           <div className="flex justify-center">
-            <div className="relative">
-              <div className="w-64 h-[500px] bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl">
-                <div className="w-full h-full bg-white rounded-[2rem] overflow-hidden">
-                  {/* Phone Screen Content */}
-                  <div className="bg-green-600 p-4 text-white">
-                    <div className="flex items-center space-x-2">
-                      <MessageCircle className="w-6 h-6" />
-                      <span className="font-semibold">WalletWala</span>
+            <div className="relative group">
+              {/* Phone Frame with Enhanced Design */}
+              <div className="relative">
+                {/* Phone Shadow */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-48 h-8 bg-black/20 rounded-full blur-xl"></div>
+                
+                {/* Phone Body */}
+                <div className="relative w-72 h-[600px] bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 rounded-[3rem] p-3 shadow-2xl border border-gray-700">
+                  {/* Phone Notch */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
+                  
+                  {/* Screen */}
+                  <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
+                    {/* Status Bar */}
+                    <div className="absolute top-0 left-0 right-0 h-8 bg-black/5 flex items-center justify-between px-6 text-xs text-gray-600 z-20">
+                      <span>9:41</span>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-1 bg-gray-600 rounded-full"></div>
+                        <div className="w-4 h-1 bg-gray-600 rounded-full"></div>
+                        <div className="w-4 h-1 bg-gray-600 rounded-full"></div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-4 space-y-3">
-                    <div className="bg-gray-100 p-3 rounded-lg">
-                      <p className="text-sm">How much did I spend on food this week?</p>
+                    
+                    {/* App Header */}
+                    <div className="bg-gradient-to-r from-green-600 to-green-700 p-4 pt-12 text-white shadow-sm">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                          <MessageCircle className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-lg">WalletWala</h3>
+                          <p className="text-xs text-green-100">AI Financial Assistant</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="bg-green-100 p-3 rounded-lg">
-                      <p className="text-sm">You spent 4,200 PKR on food this week. That's 15% of your budget!</p>
-                    </div>
-                    <div className="bg-gray-100 p-3 rounded-lg">
-                      <p className="text-sm">Kya main budget se zyada spend kar raha hun?</p>
-                    </div>
-                    <div className="bg-green-100 p-3 rounded-lg">
-                      <p className="text-sm">Abhi tak sab theek hai! 2,800 PKR budget bacha hai 😊</p>
+                    
+                    {/* Animated Chat Messages */}
+                    <div className="p-4 space-y-3 h-[480px] overflow-y-auto">
+                      {[
+                        { text: "How much did I spend on food this week?", isUser: true, delay: 0 },
+                        { text: "You spent 4,200 PKR on food this week. That's 15% of your budget!", isUser: false, delay: 1000 },
+                        { text: "Kya main budget se zyada spend kar raha hun?", isUser: true, delay: 2000 },
+                        { text: "Abhi tak sab theek hai! 2,800 PKR budget bacha hai", isUser: false, delay: 3000 },
+                      ].map((message, index) => (
+                        <div
+                          key={index}
+                          className={`flex ${message.isUser ? 'justify-start' : 'justify-end'} animate-fade-in-up`}
+                          style={{ animationDelay: `${message.delay}ms` }}
+                        >
+                          <div
+                            className={`max-w-[80%] p-3 rounded-2xl ${
+                              message.isUser 
+                                ? 'bg-gray-100 text-gray-800' 
+                                : 'bg-green-100 text-green-800'
+                            } shadow-sm transition-all duration-500 hover:shadow-md`}
+                          >
+                            <p className="text-sm leading-relaxed">{message.text}</p>
+                          </div>
+                        </div>
+                      ))}
+                      
+                      {/* Typing Indicator */}
+                      <div className="flex justify-end animate-pulse">
+                        <div className="bg-green-100 p-3 rounded-2xl">
+                          <div className="flex space-x-1">
+                            <div className="w-2 h-2 bg-green-600 rounded-full animate-bounce"></div>
+                            <div className="w-2 h-2 bg-green-600 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 bg-green-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                
+                {/* Floating Elements */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
               </div>
             </div>
           </div>
@@ -201,53 +299,68 @@ export default function WalletWalaLanding() {
       </section>
 
       {/* How It Works */}
-      <section className="bg-white py-16">
+      <section className="bg-gradient-to-br from-gray-50 to-white py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-            <p className="text-xl text-gray-600">Three simple steps to financial clarity</p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl heading-zen text-gray-900 mb-6">How It Works</h2>
+            <p className="text-xl text-zen text-gray-600 max-w-2xl mx-auto">Three simple steps to financial clarity</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <CardContent className="space-y-4">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                  <Camera className="w-8 h-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold">1️⃣ Snap & Scan</h3>
-                <p className="text-gray-600">Upload or snap your receipt, we read it instantly using AI</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <CardContent className="space-y-4">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                  <MessageCircle className="w-8 h-8 text-green-600" />
-                </div>
-                <h3 className="text-xl font-semibold">2️⃣ Talk to Your Expenses</h3>
-                <p className="text-gray-600">Ask anything, like "How much on groceries last month?"</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <CardContent className="space-y-4">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto">
-                  <BarChart3 className="w-8 h-8 text-purple-600" />
-                </div>
-                <h3 className="text-xl font-semibold">3️⃣ Get Reports & Alerts</h3>
-                <p className="text-gray-600">Daily, weekly, monthly summaries + budget warnings</p>
-              </CardContent>
-            </Card>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                icon: Camera,
+                title: "Snap & Scan",
+                description: "Upload or snap your receipt, we read it instantly using AI",
+                color: "blue",
+                delay: 0
+              },
+              {
+                icon: MessageCircle,
+                title: "Talk to Your Expenses",
+                description: "Ask anything, like 'How much on groceries last month?'",
+                color: "green",
+                delay: 200
+              },
+              {
+                icon: BarChart3,
+                title: "Get Reports & Alerts",
+                description: "Daily, weekly, monthly summaries + budget warnings",
+                color: "purple",
+                delay: 400
+              }
+            ].map((step, index) => (
+              <Card 
+                key={index}
+                className="text-center p-8 hover-lift border-0 shadow-lg bg-white/80 backdrop-blur-sm"
+                style={{ animationDelay: `${step.delay}ms` }}
+              >
+                <CardContent className="space-y-6">
+                  <div className="relative">
+                    <div className={`w-20 h-20 bg-gradient-to-br from-${step.color}-500 to-${step.color}-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
+                      <step.icon className="w-10 h-10 text-white" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+                      <span className="text-sm font-bold text-gray-700">{index + 1}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-2xl heading-zen text-gray-900">{step.title}</h3>
+                    <p className="text-zen text-gray-600 leading-relaxed">{step.description}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Pakistani Lifestyle Personas */}
-      <section className="py-16 bg-gradient-to-br from-orange-50 via-white to-green-50">
+      <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-green-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Made for Every Pakistani</h2>
-            <p className="text-xl text-gray-600">See how WalletWala fits your lifestyle</p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl heading-zen text-gray-900 mb-6">Made for Every Pakistani</h2>
+            <p className="text-xl text-zen text-gray-600 max-w-3xl mx-auto">See how WalletWala fits your lifestyle</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
@@ -255,65 +368,85 @@ export default function WalletWalaLanding() {
               {
                 title: "The Student",
                 subtitle: "Keeps track of chai & notes",
-                icon: "🎓",
-                color: "from-blue-400 to-blue-600",
+                icon: GraduationCap,
+                bgColor: "bg-blue-50",
+                hoverColor: "hover:bg-blue-100",
+                iconBg: "bg-gradient-to-br from-blue-500 to-blue-600",
+                iconColor: "text-white",
                 example: "Monthly chai budget: 1,200 PKR\nBooks & supplies: 3,500 PKR\nTransport: 2,000 PKR",
                 tip: "Get alerts when your chai money runs low!",
               },
               {
                 title: "The Freelancer",
                 subtitle: "Knows when client paid late",
-                icon: "💻",
-                color: "from-purple-400 to-purple-600",
+                icon: Laptop,
+                bgColor: "bg-purple-50",
+                hoverColor: "hover:bg-purple-100",
+                iconBg: "bg-gradient-to-br from-purple-500 to-purple-600",
+                iconColor: "text-white",
                 example: "Client A: Payment due 3 days ago\nInternet bill: 2,500 PKR\nCo-working space: 8,000 PKR",
                 tip: "Track irregular income and plan for dry spells",
               },
               {
                 title: "The Shopaholic",
                 subtitle: "Alerts when sale season gets dangerous",
-                icon: "🛍️",
-                color: "from-pink-400 to-pink-600",
+                icon: ShoppingBag,
+                bgColor: "bg-pink-50",
+                hoverColor: "hover:bg-pink-100",
+                iconBg: "bg-gradient-to-br from-pink-500 to-pink-600",
+                iconColor: "text-white",
                 example: "Shopping this month: 15,600 PKR\nBudget remaining: 4,400 PKR\nSale alert: Khaadi 50% off!",
                 tip: "Set shopping limits and get warned before overspending",
               },
               {
                 title: "The Family Planner",
                 subtitle: "Keeps Eid shopping in budget",
-                icon: "👨‍👩‍👧‍👦",
-                color: "from-green-400 to-green-600",
+                icon: Users,
+                bgColor: "bg-green-50",
+                hoverColor: "hover:bg-green-100",
+                iconBg: "bg-gradient-to-br from-green-500 to-green-600",
+                iconColor: "text-white",
                 example: "Eid budget: 25,000 PKR\nClothes: 12,000 PKR spent\nGifts: 8,000 PKR remaining",
                 tip: "Plan family expenses and special occasions",
               },
               {
                 title: "The Professional",
                 subtitle: "Tracks office lunches & fuel",
-                icon: "💼",
-                color: "from-indigo-400 to-indigo-600",
+                icon: Briefcase,
+                bgColor: "bg-indigo-50",
+                hoverColor: "hover:bg-indigo-100",
+                iconBg: "bg-gradient-to-br from-indigo-500 to-indigo-600",
+                iconColor: "text-white",
                 example: "Fuel this month: 8,500 PKR\nOffice lunches: 4,200 PKR\nParking fees: 1,800 PKR",
                 tip: "Manage work-related expenses efficiently",
               },
             ].map((persona, index) => (
               <Card
                 key={index}
-                className="group cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                className={`group cursor-pointer transition-all duration-500 ${persona.bgColor} ${persona.hoverColor} border-0 shadow-sm hover:shadow-lg overflow-hidden`}
               >
-                <CardContent className="p-6 text-center space-y-4">
-                  <div
-                    className={`w-16 h-16 bg-gradient-to-r ${persona.color} rounded-full flex items-center justify-center mx-auto text-2xl`}
-                  >
-                    {persona.icon}
+                <CardContent className="p-6 text-center relative">
+                  {/* Single Icon Container */}
+                  <div className="w-16 h-16 mx-auto mb-4">
+                    <div className={`w-full h-full ${persona.iconBg} rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg`}>
+                      <persona.icon className={`w-8 h-8 ${persona.iconColor}`} />
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-900">{persona.title}</h3>
-                    <p className="text-sm text-gray-600">{persona.subtitle}</p>
+                  
+                  {/* Content */}
+                  <div className="space-y-2">
+                    <h3 className="heading-zen text-lg text-gray-900">{persona.title}</h3>
+                    <p className="text-zen text-sm text-gray-600">{persona.subtitle}</p>
                   </div>
 
-                  {/* Hover Content */}
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 space-y-3">
-                    <div className="bg-gray-50 p-3 rounded-lg text-left">
-                      <p className="text-xs text-gray-700 whitespace-pre-line">{persona.example}</p>
+                  {/* Hover Content - Slides up from bottom */}
+                  <div className="absolute inset-0 bg-white bg-opacity-95 backdrop-blur-sm flex flex-col justify-center items-center p-6 transform translate-y-full transition-transform duration-500 group-hover:translate-y-0">
+                    <div className="text-center space-y-3">
+                      <div className="bg-gray-50 p-3 rounded-lg">
+                        <p className="text-xs text-gray-700 whitespace-pre-line">{persona.example}</p>
+                      </div>
+                      <p className="text-xs text-green-600 font-medium">{persona.tip}</p>
                     </div>
-                    <p className="text-xs text-green-600 font-medium">{persona.tip}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -323,20 +456,28 @@ export default function WalletWalaLanding() {
       </section>
 
       {/* Live Wallet Mood Meter */}
-      <section className="bg-white py-16">
+      <section className="bg-gradient-to-br from-white to-gray-50 py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Your Wallet Has Feelings Too</h2>
-            <p className="text-xl text-gray-600">Drag the slider to see how your spending affects your wallet's mood</p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl heading-zen text-gray-900 mb-6">Your Wallet Has Feelings Too</h2>
+            <p className="text-xl text-zen text-gray-600 max-w-3xl mx-auto">Drag the slider to see how your spending affects your wallet's mood</p>
           </div>
 
-          <div className="max-w-2xl mx-auto">
-            <Card className="p-8">
-              <CardContent className="space-y-6">
+          <div className="max-w-3xl mx-auto">
+            <Card className="p-10 border-0 shadow-2xl bg-white/80 backdrop-blur-sm">
+              <CardContent className="space-y-8">
                 {/* Current Mood Display */}
                 <div className="text-center space-y-4">
-                  <div className="text-6xl">{currentMood <= 40 ? "😁" : currentMood <= 75 ? "😐" : "😰"}</div>
-                  <h3 className="text-2xl font-bold text-gray-900">
+                  <div className="flex justify-center">
+                    {currentMood <= 40 ? (
+                      <Smile className="w-16 h-16 text-green-500" />
+                    ) : currentMood <= 75 ? (
+                      <Meh className="w-16 h-16 text-yellow-500" />
+                    ) : (
+                      <Frown className="w-16 h-16 text-red-500" />
+                    )}
+                  </div>
+                  <h3 className="text-2xl heading-zen text-gray-900">
                     {currentMood <= 40 ? "Wallet is Happy" : currentMood <= 75 ? "Wallet is Okay" : "Wallet is Crying"}
                   </h3>
                   <p className="text-gray-600">
@@ -351,9 +492,9 @@ export default function WalletWalaLanding() {
                 {/* Interactive Mood Meter Bar */}
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm text-gray-500">
-                    <span>😁 Rich</span>
-                    <span>😐 Okay</span>
-                    <span>😰 Broke</span>
+                    <span className="flex items-center gap-1"><Smile className="w-4 h-4" /> Rich</span>
+                    <span className="flex items-center gap-1"><Meh className="w-4 h-4" /> Okay</span>
+                    <span className="flex items-center gap-1"><Frown className="w-4 h-4" /> Broke</span>
                   </div>
                   <div
                     className="relative w-full bg-gray-200 rounded-full h-6 cursor-pointer select-none"
@@ -405,7 +546,7 @@ export default function WalletWalaLanding() {
                         : "bg-gray-50 hover:bg-gray-100 border-2 border-transparent"
                     }`}
                   >
-                    <div className="text-2xl mb-1">😁</div>
+                    <div className="mb-1"><Smile className="w-6 h-6 text-green-600 mx-auto" /></div>
                     <p className="text-xs font-medium">Under Budget</p>
                   </button>
                   <button
@@ -416,7 +557,7 @@ export default function WalletWalaLanding() {
                         : "bg-gray-50 hover:bg-gray-100 border-2 border-transparent"
                     }`}
                   >
-                    <div className="text-2xl mb-1">😐</div>
+                    <div className="mb-1"><Meh className="w-6 h-6 text-yellow-600 mx-auto" /></div>
                     <p className="text-xs font-medium">On Track</p>
                   </button>
                   <button
@@ -427,15 +568,16 @@ export default function WalletWalaLanding() {
                         : "bg-gray-50 hover:bg-gray-100 border-2 border-transparent"
                     }`}
                   >
-                    <div className="text-2xl mb-1">😰</div>
+                    <div className="mb-1"><Frown className="w-6 h-6 text-red-600 mx-auto" /></div>
                     <p className="text-xs font-medium">Overspent</p>
                   </button>
                 </div>
 
                 {/* Interactive Tip */}
                 <div className="text-center">
-                  <p className="text-sm text-blue-600 bg-blue-50 p-3 rounded-lg">
-                    💡 <strong>Try it:</strong> Drag the slider above to see how your wallet reacts to different
+                  <p className="text-sm text-blue-600 bg-blue-50 p-3 rounded-lg flex items-center justify-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    <strong>Try it:</strong> Drag the slider above to see how your wallet reacts to different
                     spending levels!
                   </p>
                 </div>
@@ -449,8 +591,8 @@ export default function WalletWalaLanding() {
       <section className="py-16 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Try It Live</h2>
-            <p className="text-xl text-gray-600">Ask your expenses anything - see how WalletWala responds</p>
+            <h2 className="text-3xl lg:text-4xl heading-zen text-gray-900 mb-4">Try It Live</h2>
+            <p className="text-xl text-zen text-gray-600">Ask your expenses anything - see how WalletWala responds</p>
           </div>
 
           <div className="max-w-md mx-auto">
@@ -496,8 +638,8 @@ export default function WalletWalaLanding() {
       <section className="bg-white py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Why WalletWala</h2>
-            <p className="text-xl text-gray-600">Everything you need to master your money</p>
+            <h2 className="text-3xl lg:text-4xl heading-zen text-gray-900 mb-4">Why WalletWala</h2>
+            <p className="text-xl text-zen text-gray-600">Everything you need to master your money</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -525,7 +667,7 @@ export default function WalletWalaLanding() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">What People Say</h2>
+            <h2 className="text-3xl lg:text-4xl heading-zen text-gray-900 mb-4">What People Say</h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -564,8 +706,11 @@ export default function WalletWalaLanding() {
       <section className="bg-gradient-to-r from-green-600 to-blue-600 py-16">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white">Ready to make your expenses talk?</h2>
-            <p className="text-xl text-green-100">📲 Install WalletWala on your phone today!</p>
+            <h2 className="text-3xl lg:text-4xl heading-zen text-white">Ready to make your expenses talk?</h2>
+            <p className="text-xl text-zen text-green-100 flex items-center justify-center gap-2">
+              <Smartphone className="w-5 h-5" />
+              Install WalletWala on your phone today!
+            </p>
             <Button size="lg" className="bg-white text-green-600 hover:bg-gray-100">
               <Smartphone className="mr-2 w-5 h-5" />
               Install Now
@@ -584,6 +729,7 @@ export default function WalletWalaLanding() {
                 <span className="font-bold text-xl">WalletWala</span>
               </div>
               <p className="text-gray-400">Making expense tracking conversational for Pakistan.</p>
+              <p className="decorative-zen text-gray-500 text-sm">پاکستان کے لیے گفتگو کی طرح اخراجات کی ٹریکنگ</p>
             </div>
 
             <div>

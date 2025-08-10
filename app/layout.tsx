@@ -1,7 +1,13 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import { Inter } from 'next/font/google'
 import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'v0 App',
@@ -17,15 +23,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <style>{`
 html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
+  font-family: 'Inter', 'system-ui', 'sans-serif';
+  --font-sans: ${inter.variable};
+  --font-zen: 'Inter', 'system-ui', 'sans-serif';
+  --font-decorative: 'Noto Nastaliq Urdu', serif;
 }
         `}</style>
       </head>
-      <body>{children}</body>
+      <body className={inter.variable}>{children}</body>
     </html>
   )
 }
