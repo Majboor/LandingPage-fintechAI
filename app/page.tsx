@@ -38,6 +38,7 @@ import {
   Target,
   Wallet,
   CreditCard,
+  ExternalLink,
 } from "lucide-react"
 
 const chatMessages = [
@@ -137,6 +138,10 @@ export default function WalletWalaLanding() {
       demoResponses[demoInput.toLowerCase() as keyof typeof demoResponses] ||
       "I can help you track expenses, analyze spending patterns, and set budgets. Try asking about your spending!"
     setDemoResponse(response)
+  }
+
+  const handleJoinBeta = () => {
+    window.open('https://chat.whatsapp.com/J41JVmKII3jEldhAtm8Av8', '_blank')
   }
 
   return (
@@ -242,6 +247,24 @@ export default function WalletWalaLanding() {
               >
                 Download App
               </Button>
+            </div>
+            
+            {/* Beta CTA */}
+            <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-200">
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-900">🚀 Join the Beta Program</p>
+                  <p className="text-xs text-gray-600 mt-1">Get early access and exclusive features</p>
+                </div>
+                <Button 
+                  size="sm" 
+                  className="bg-green-600 hover:bg-green-700 text-white"
+                  onClick={handleJoinBeta}
+                >
+                  <MessageCircle className="mr-2 w-4 h-4" />
+                  Join WhatsApp
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -385,6 +408,28 @@ export default function WalletWalaLanding() {
               </Card>
             ))}
           </div>
+          
+          {/* Beta CTA after How It Works */}
+          <div className="mt-16 text-center">
+            <div className="max-w-2xl mx-auto p-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl border border-green-200 shadow-lg">
+              <div className="space-y-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                  <MessageCircle className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-2xl heading-zen text-gray-900">Ready to Try WalletWala?</h3>
+                <p className="text-zen text-gray-600">Join our WhatsApp community to get early access and be the first to experience AI-powered expense tracking!</p>
+                <Button 
+                  size="lg" 
+                  className="bg-green-600 hover:bg-green-700 text-white transition-all duration-300 hover:scale-105"
+                  onClick={handleJoinBeta}
+                >
+                  <MessageCircle className="mr-2 w-5 h-5" />
+                  Join Beta on WhatsApp
+                  <ExternalLink className="ml-2 w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -515,6 +560,29 @@ export default function WalletWalaLanding() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+        
+        {/* Beta CTA after Personas */}
+        <div className="mt-16 text-center">
+          <div className="max-w-2xl mx-auto p-6 bg-gradient-to-r from-orange-50 to-green-50 rounded-xl border border-orange-200 shadow-md">
+            <div className="flex items-center justify-center space-x-4">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                <MessageCircle className="w-6 h-6 text-orange-600" />
+              </div>
+              <div className="text-left">
+                <h4 className="text-lg font-semibold text-gray-900">Join the Beta Community</h4>
+                <p className="text-sm text-gray-600">Connect with other Pakistanis testing WalletWala</p>
+              </div>
+              <Button 
+                size="sm" 
+                className="bg-green-600 hover:bg-green-700 text-white whitespace-nowrap"
+                onClick={handleJoinBeta}
+              >
+                <MessageCircle className="mr-2 w-4 h-4" />
+                Join WhatsApp
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -651,6 +719,22 @@ export default function WalletWalaLanding() {
                     spending levels!
                   </p>
                 </div>
+                
+                {/* Beta CTA in Mood Meter */}
+                <div className="text-center pt-4 border-t border-gray-200">
+                  <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg border border-green-200">
+                    <p className="text-sm font-medium text-gray-900 mb-2">Want to try the real thing?</p>
+                    <p className="text-xs text-gray-600 mb-3">Join our WhatsApp community for early access!</p>
+                    <Button 
+                      size="sm" 
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                      onClick={handleJoinBeta}
+                    >
+                      <MessageCircle className="mr-2 w-4 h-4" />
+                      Join Beta Community
+                    </Button>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -699,7 +783,7 @@ export default function WalletWalaLanding() {
                   </ul>
                 </div>
                 
-                <div className="pt-4 border-t border-gray-200">
+                <div className="pt-4 border-t border-gray-200 space-y-3">
                   <Button 
                     className="w-full bg-green-600 hover:bg-green-700 text-white"
                     onClick={() => window.open('https://admin.walletwala.techrealm.pk', '_blank')}
@@ -707,6 +791,19 @@ export default function WalletWalaLanding() {
                     <MessageCircle className="mr-2 w-4 h-4" />
                     Try Real App
                   </Button>
+                  
+                  <div className="text-center">
+                    <p className="text-xs text-gray-500 mb-2">Or join our beta community</p>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full text-green-600 border-green-200 hover:bg-green-50"
+                      onClick={handleJoinBeta}
+                    >
+                      <MessageCircle className="mr-2 w-4 h-4" />
+                      Join WhatsApp Beta
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -739,6 +836,39 @@ export default function WalletWalaLanding() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+          
+          {/* Beta CTA after Features */}
+          <div className="mt-16 text-center">
+            <div className="max-w-3xl mx-auto p-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl border border-green-200 shadow-lg">
+              <div className="space-y-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                  <MessageCircle className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-2xl heading-zen text-gray-900">Ready to Master Your Money?</h3>
+                <p className="text-zen text-gray-600">Join thousands of Pakistanis who are already using WalletWala to take control of their finances!</p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button 
+                    size="lg" 
+                    className="bg-green-600 hover:bg-green-700 text-white transition-all duration-300 hover:scale-105"
+                    onClick={handleJoinBeta}
+                  >
+                    <MessageCircle className="mr-2 w-5 h-5" />
+                    Join Beta on WhatsApp
+                    <ExternalLink className="ml-2 w-4 h-4" />
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="transition-all duration-300 hover:scale-105"
+                    onClick={() => window.open('https://admin.walletwala.techrealm.pk/install', '_blank')}
+                  >
+                    <Smartphone className="mr-2 w-5 h-5" />
+                    Download App
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -779,6 +909,29 @@ export default function WalletWalaLanding() {
               </CardContent>
             </Card>
           </div>
+          
+          {/* Beta CTA after Testimonials */}
+          <div className="mt-16 text-center">
+            <div className="max-w-2xl mx-auto p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border border-yellow-200 shadow-md">
+              <div className="flex items-center justify-center space-x-4">
+                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                  <MessageCircle className="w-6 h-6 text-yellow-600" />
+                </div>
+                <div className="text-left">
+                  <h4 className="text-lg font-semibold text-gray-900">Join Our Community</h4>
+                  <p className="text-sm text-gray-600">Connect with other users and get support</p>
+                </div>
+                <Button 
+                  size="sm" 
+                  className="bg-green-600 hover:bg-green-700 text-white whitespace-nowrap"
+                  onClick={handleJoinBeta}
+                >
+                  <MessageCircle className="mr-2 w-4 h-4" />
+                  Join WhatsApp
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -791,14 +944,25 @@ export default function WalletWalaLanding() {
               <Smartphone className="w-5 h-5" />
               Install WalletWala on your phone today!
             </p>
-            <Button 
-              size="lg" 
-              className="bg-white text-green-600 hover:bg-gray-100"
-              onClick={() => window.open('https://admin.walletwala.techrealm.pk/install', '_blank')}
-            >
-              <Smartphone className="mr-2 w-5 h-5" />
-              Install Now
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-white text-green-600 hover:bg-gray-100"
+                onClick={() => window.open('https://admin.walletwala.techrealm.pk/install', '_blank')}
+              >
+                <Smartphone className="mr-2 w-5 h-5" />
+                Install Now
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-transparent border-white text-white hover:bg-white hover:text-green-600"
+                onClick={handleJoinBeta}
+              >
+                <MessageCircle className="mr-2 w-5 h-5" />
+                Join Beta Community
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -863,6 +1027,17 @@ export default function WalletWalaLanding() {
                 <li>
                   <a href="#" className="hover:text-white">
                     Contact
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://chat.whatsapp.com/J41JVmKII3jEldhAtm8Av8" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-white flex items-center gap-2"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    Join Beta Community
                   </a>
                 </li>
                 <li>
