@@ -65,6 +65,8 @@ export default function WalletWalaLanding() {
   const moodBarRef = useRef<HTMLDivElement>(null)
   const [visibleCards, setVisibleCards] = useState<number[]>([])
   const [clickedCards, setClickedCards] = useState<number[]>([])
+  const [showCommunityPopup, setShowCommunityPopup] = useState(false)
+  const [hasSeenPopup, setHasSeenPopup] = useState(false)
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true)
@@ -134,6 +136,12 @@ export default function WalletWalaLanding() {
 
   const handleDemoSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!hasSeenPopup) {
+      setShowCommunityPopup(true)
+      return
+    }
+    
     const response =
       demoResponses[demoInput.toLowerCase() as keyof typeof demoResponses] ||
       "I can help you track expenses, analyze spending patterns, and set budgets. Try asking about your spending!"
@@ -142,6 +150,11 @@ export default function WalletWalaLanding() {
 
   const handleJoinBeta = () => {
     window.open('https://chat.whatsapp.com/J41JVmKII3jEldhAtm8Av8', '_blank')
+  }
+
+  const handlePopupClose = () => {
+    setShowCommunityPopup(false)
+    setHasSeenPopup(true)
   }
 
   return (
@@ -757,6 +770,14 @@ export default function WalletWalaLanding() {
                     <div className="bg-green-100 p-3 rounded-lg">
                       <p className="text-sm text-green-800">{demoResponse}</p>
                     </div>
+                  ) : !hasSeenPopup ? (
+                    <div className="text-center space-y-2">
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                        <MessageCircle className="w-6 h-6 text-green-600" />
+                      </div>
+                      <p className="text-sm text-gray-600">Join our community to try the full experience!</p>
+                      <p className="text-xs text-gray-500">Type a question and click Ask to get started</p>
+                    </div>
                   ) : (
                     <p className="text-gray-500 text-center">Type a question to see how WalletWala responds!</p>
                   )}
@@ -769,7 +790,12 @@ export default function WalletWalaLanding() {
                     onChange={(e) => setDemoInput(e.target.value)}
                     className="flex-1"
                   />
-                  <Button type="submit" size="sm">
+                  <Button 
+                    type="submit" 
+                    size="sm"
+                    disabled={!demoInput.trim()}
+                    className={!demoInput.trim() ? "opacity-50 cursor-not-allowed" : ""}
+                  >
                     Ask
                   </Button>
                 </form>
@@ -810,6 +836,73 @@ export default function WalletWalaLanding() {
           </div>
         </div>
       </section>
+
+      {/* Community Popup */}
+      {showCommunityPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all">
+            <div className="text-center space-y-6">
+              {/* Close button */}
+              <button
+                onClick={handlePopupClose}
+                className="absolute top-4 right-4 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-600 transition-colors"
+              >
+                ×
+              </button>
+              
+              {/* Icon */}
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                <MessageCircle className="w-10 h-10 text-green-600" />
+              </div>
+              
+              {/* Content */}
+              <div className="space-y-4">
+                <h3 className="text-2xl heading-zen text-gray-900">Join Our Community First!</h3>
+                <p className="text-zen text-gray-600">
+                  To try the full WalletWala experience and get real-time answers to your financial questions, join our WhatsApp community of early users.
+                </p>
+                
+                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                  <p className="text-sm text-green-800 font-medium mb-2">What you'll get:</p>
+                  <ul className="text-xs text-green-700 space-y-1">
+                    <li>• Early access to new features</li>
+                    <li>• Direct support from our team</li>
+                    <li>• Tips and tricks from other users</li>
+                    <li>• Exclusive beta testing opportunities</li>
+                  </ul>
+                </div>
+              </div>
+              
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button 
+                  size="lg" 
+                  className="bg-green-600 hover:bg-green-700 text-white flex-1"
+                  onClick={() => {
+                    handleJoinBeta()
+                    handlePopupClose()
+                  }}
+                >
+                  <MessageCircle className="mr-2 w-5 h-5" />
+                  Join WhatsApp Community
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="flex-1"
+                  onClick={handlePopupClose}
+                >
+                  Maybe Later
+                </Button>
+              </div>
+              
+              <p className="text-xs text-gray-500">
+                You can still try the demo after joining, or come back anytime!
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Features Grid */}
       <section className="bg-white py-16">
